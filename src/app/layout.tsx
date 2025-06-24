@@ -1,6 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Inter,
+  Abril_Fatface,
+  Bebas_Neue,
+} from "next/font/google";
+import localFont from "next/font/local";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
+
+const fFreedom = localFont({
+  src: "../../public/fonts/forever_freedom_italic.ttf",
+  variable: "--font-freedom",
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,6 +29,18 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const abriel = Abril_Fatface({
+  weight: "400",
+  variable: "--font-abril-fatface",
+  subsets: ["latin"],
+});
+
+const bebas = Bebas_Neue({
+  weight: "400",
+  variable: "--font-bebas-neue",
   subsets: ["latin"],
 });
 
@@ -23,11 +55,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${fFreedom.variable} ${abriel.variable} ${bebas.variable} antialiased `}
       >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
