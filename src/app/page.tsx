@@ -1,10 +1,10 @@
 "use client";
 
-import Hero from "../components/Hero";
-import LatestDropsSection from "../components/LatestDropsSection";
-import TopSellingSection from "../components/TopSellingSection";
-import MiddleHero from "../components/MiddleHero";
-import FeaturedCollections from "../components/FeaturedCollections";
+import Hero from "../components/homepage/Hero";
+import LatestDropsSection from "../components/homepage/LatestDropsSection";
+import TopSellingSection from "../components/homepage/TopSellingSection";
+import MiddleHero from "../components/homepage/MiddleHero";
+import FeaturedCollections from "../components/homepage/FeaturedCollections";
 
 export default function Home() {
   return (

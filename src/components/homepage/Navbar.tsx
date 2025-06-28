@@ -480,17 +480,19 @@ const navbar = () => {
           </div>
 
           {/* Shopping Cart */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="p-2 relative cursor-pointer"
-          >
-            <ShoppingCart className="h-5 w-5" />
+          <Link href={"/cart"}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="p-2 relative cursor-pointer"
+            >
+              <ShoppingCart className="h-5 w-5" />
 
-            <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-              0
-            </span>
-          </Button>
+              <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                0
+              </span>
+            </Button>
+          </Link>
 
           {/* User Account */}
           <Button variant="ghost" size="sm" className="p-2 cursor-pointer">

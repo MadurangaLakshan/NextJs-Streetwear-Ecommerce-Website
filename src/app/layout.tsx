@@ -7,9 +7,10 @@ import {
   Bebas_Neue,
 } from "next/font/google";
 import localFont from "next/font/local";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/homepage/Navbar";
+import Footer from "@/components/homepage/Footer";
 import "./globals.css";
+import ClientLayout from "@/components/ClientLayout";
 
 const fFreedom = localFont({
   src: "../../public/fonts/forever_freedom_italic.ttf",
@@ -55,13 +56,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth ">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${fFreedom.variable} ${abriel.variable} ${bebas.variable} antialiased `}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
