@@ -7,9 +7,10 @@ import {
   Bebas_Neue,
 } from "next/font/google";
 import localFont from "next/font/local";
-import Navbar from "@/components/homepage/Navbar";
-import Footer from "@/components/homepage/Footer";
+
 import "./globals.css";
+
+import { s } from "framer-motion/client";
 import ClientLayout from "@/components/ClientLayout";
 
 const fFreedom = localFont({

@@ -1,16 +1,16 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
-import { SectionCards } from "@/components/section-cards"
-import { SiteHeader } from "@/components/site-header"
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+"use client";
 
-import data from "./data.json"
+import { AnalyticsContent } from "@/components/admin/AnalyticsContent";
+import OrdersManagement from "@/components/admin/Orders";
+import ProductManagement from "@/components/admin/Products";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 
 export default function Page() {
+  const [tab, setTab] = useState("dashboard");
   return (
     <SidebarProvider
       style={
@@ -20,21 +20,32 @@ export default function Page() {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <AppSidebar variant="inset" onNavSelect={setTab} />
       <SidebarInset>
         <SiteHeader />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
-              <div className="px-4 lg:px-6">
-                <ChartAreaInteractive />
-              </div>
-              <DataTable data={data} />
-            </div>
+        <Tabs
+          defaultValue="dashboard"
+          value={tab}
+          onValueChange={setTab}
+          className="flex-1 flex flex-col"
+        >
+          <div className="flex-1 px-4 lg:px-6 py-4">
+            <TabsContent value="dashboard">
+              <AnalyticsContent />
+            </TabsContent>
+            <TabsContent value="products">
+              <ProductManagement />
+            </TabsContent>
+            <TabsContent value="orders">
+              <OrdersManagement />
+            </TabsContent>
+
+            <TabsContent value="user accounts">
+              <span>users</span>
+            </TabsContent>
           </div>
-        </div>
+        </Tabs>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

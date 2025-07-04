@@ -9,18 +9,16 @@ import {
   IconFileAi,
   IconFileDescription,
   IconFileWord,
-  IconFolder,
   IconHelp,
-  IconInnerShadowTop,
   IconListDetails,
+  IconTruckDelivery,
+  IconUsersGroup,
   IconReport,
   IconSearch,
   IconSettings,
   IconUsers,
 } from "@tabler/icons-react";
-
-import { NavDocuments } from "@/components/nav-documents";
-import { NavMain } from "@/components/nav-main";
+import Image from "next/image";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -32,8 +30,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Button } from "./ui/button";
 import Link from "next/link";
-import Image from "next/image";
+import { title } from "process";
 
 const data = {
   user: {
@@ -48,22 +47,18 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
+      title: "Products",
       url: "#",
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
+      title: "Orders",
       url: "#",
-      icon: IconChartBar,
+      icon: IconTruckDelivery,
     },
+
     {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
+      title: "User Accounts",
       url: "#",
       icon: IconUsers,
     },
@@ -152,7 +147,11 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  onNavSelect?: (value: string) => void;
+}
+
+export function AppSidebar({ onNavSelect, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -160,26 +159,36 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-6.5 "
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <Image
-                  src="/logo.png"
-                  alt="Logo"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className="w-24 h-auto sm:w-32 pt-5 md:pt-0 hover:cursor-pointer"
-                  priority
-                />
-              </a>
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-24 h-auto sm:w-32 hover:cursor-pointer"
+                priority
+              />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        {data.navMain.map((item) => (
+          <SidebarMenuButton
+            className="data-[slot=sidebar-menu-button]:!p-1.5 mx-2 cursor-pointer"
+            key={item.title}
+            asChild
+            onClick={() => onNavSelect?.(item.title.toLowerCase())}
+          >
+            <a>
+              <item.icon />
+              <span>{item.title}</span>
+            </a>
+          </SidebarMenuButton>
+        ))}
+
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
